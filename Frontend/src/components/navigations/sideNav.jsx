@@ -1,4 +1,7 @@
-import { Drawer, DrawerOverlay, DrawerContent, DrawerBody, DrawerHeader, DrawerFooter } from "@chakra-ui/react";
+import { Drawer, DrawerOverlay, DrawerContent, DrawerBody, DrawerHeader, DrawerFooter, VStack, Divider, Heading } from "@chakra-ui/react";
+import { MdHome, MdAssignment, MdAssignmentTurnedIn, MdAccountCircle } from "react-icons/md";
+import LinkBoxDesign from "../Links/linkBox";
+
 
 const SideNav = ({ onClose, isOpen, finalFocusRef }) => {
   return (
@@ -6,13 +9,21 @@ const SideNav = ({ onClose, isOpen, finalFocusRef }) => {
         <DrawerOverlay />
         <DrawerContent>
             <DrawerHeader borderBottomWidth='1px'>
-                DoItNow Logo
+                DoItNowLogo
             </DrawerHeader>
-            <DrawerBody>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+            <DrawerBody p='20px'>
+                <VStack spacing={2}>
+                <Heading as='h2'>Dashboard</Heading>
+                    <LinkBoxDesign textProps='Home' IconsProps={MdHome} LinksProps='/home'  />
+                    <LinkBoxDesign textProps='To Do Board' IconsProps={MdAssignment} LinksProps='/TodoBoard'  />
+                    <LinkBoxDesign textProps='To Do List' IconsProps={MdAssignmentTurnedIn} LinksProps='/TodoList'  />
+                </VStack>
             </DrawerBody>
+            <Divider />
+            <DrawerFooter>
+                    <LinkBoxDesign textProps='Profile' IconsProps={MdAccountCircle} LinksProps='/account'  />
+                    <LinkBoxDesign textProps='Sign out' IconsProps={MdAssignmentTurnedIn} LinksProps='/TodoList'  />
+            </DrawerFooter>
         </DrawerContent>
    </Drawer>
   )

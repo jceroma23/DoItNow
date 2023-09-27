@@ -14,7 +14,7 @@ const Navigation = () => {
     }
 
   return (
-    <Flex bg='gray.700' as='nav' py='1.5' pl='8' pr='16' alignItems='center'>
+    <Flex bg='gray.700' as='nav' py='1' pl='8' pr='16' alignItems='center'>
         <HStack spacing={4}>
             <IconButton aria-label='Side Nav' icon={<HamburgerIcon h={5} w={5} size='sm' />} colorScheme='gray' variant='solid' size='sm' onClick={onOpen} ref={btnRef}/>
             <Heading as='h1' color='gray.100'>DoItNow Logo</Heading>
