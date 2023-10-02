@@ -15,14 +15,14 @@ const SideNav = ({ onClose, isOpen, finalFocusRef }) => {
                 <VStack spacing={2}>
                 <Heading as='h2'>Dashboard</Heading>
                     <LinkBoxDesign textProps='Home' IconsProps={MdHome} LinksProps='/home'  />
-                    <LinkBoxDesign textProps='To Do Board' IconsProps={MdAssignment} LinksProps='/TodoBoard'  />
-                    <LinkBoxDesign textProps='To Do List' IconsProps={MdAssignmentTurnedIn} LinksProps='/TodoList'  />
+                    <LinkBoxDesign textProps='To Do Board' IconsProps={MdAssignment} LinksProps='/board'  />
+                    <LinkBoxDesign textProps='To Do List' IconsProps={MdAssignmentTurnedIn} LinksProps='/Todo'  />
                 </VStack>
             </DrawerBody>
             <Divider />
             <DrawerFooter>
                     <LinkBoxDesign textProps='Profile' IconsProps={MdAccountCircle} LinksProps='/account'  />
-                    <LinkBoxDesign textProps='Sign out' IconsProps={MdAssignmentTurnedIn} LinksProps='/TodoList'  />
+                    <LinkBoxDesign textProps='Sign out' IconsProps={MdAssignmentTurnedIn} LinksProps='/todo'  />
             </DrawerFooter>
         </DrawerContent>
    </Drawer>

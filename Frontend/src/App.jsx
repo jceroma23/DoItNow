@@ -7,8 +7,10 @@ import { RequireAuth } from "react-auth-kit"; //Not yet implemented.
 // Pages
 import LoginPage from './pages/LoginPage'
 import HomePage from './pages/homePage'
-import TaskBoard from './pages/taskBoard'
-import TaskList from './pages/taskList'
+import BoardPage from './pages/boardPage';
+import TaskPage from './pages/taskPage';
+
+
 
 
 function App() {
@@ -30,8 +32,8 @@ function App() {
         <Routes>
           <Route path='/' element={<LoginPage/>} />
           <Route path='/home' element={<HomePage/>} />
-          <Route path='/taskboard' element={<TaskBoard/>} />
-          <Route path='/tasklist' element={<TaskList/>} />
+          <Route path='/board' element={<BoardPage/>} />
+          <Route path='/todo' element={<TaskPage/>} />
         </Routes>
       </BrowserRouter>
     )

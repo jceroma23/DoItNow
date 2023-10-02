@@ -1,4 +1,4 @@
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, FormControl, FormLabel, FormHelperText, FormErrorMessage, VStack, Input, Text, Checkbox, Stack } from "@chakra-ui/react";
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, VStack, Input, Text, Checkbox, Stack } from "@chakra-ui/react";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
@@ -73,7 +73,7 @@ const FormLogin = ({ onClose, isOpen }) => {
                   colorScheme="purple"
                 >Remember me?</Field>
                 </Stack>
-                <PrimaryButton text='Login' type='submit' isLoading={isLoading} />
+                  <PrimaryButton text='Login' type='submit' isLoading={isLoading} />
               </VStack>
             </form>
           )}       
