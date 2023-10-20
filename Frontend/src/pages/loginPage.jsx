@@ -19,11 +19,6 @@ const LoginPage = () => {
 const LoginModal = useDisclosure()
 const RegisterModal = useDisclosure()
 
-  const handleClick = () => {
-    alert(`Hello Login`)
-  }
-
-
   return (
     <>
       <Box h='100vh' p='1.5'>

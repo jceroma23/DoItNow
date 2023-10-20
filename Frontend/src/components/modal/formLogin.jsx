@@ -3,10 +3,11 @@ import { Formik, Field } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom'
-
+import axios from "axios";
 // Components
 import PrimaryButton from "../buttons/primaryButton";
 import InputField from "../input/inputField";
+import { loginRoute } from "../../util/APIroute";
 
 
 
@@ -17,14 +18,36 @@ const FormLogin = ({ onClose, isOpen }) => {
   const navigation = useNavigate()
 
   // HandleSubmit form
-  const onSubmit = (values) => {
-    setIsLoading(true)
-    alert(JSON.stringify(values, null, 2))
-    setTimeout(() => {
-      setIsLoading(false)
-      navigation('/home')
-    }, 2000)
-  }
+  const onSubmit = async (values) => {
+    try {
+      setIsLoading(true)
+      // alert(JSON.stringify(values, null, 2))
+      const { Username, Password } = values;
+
+      const { data } = await axios.post(loginRoute, {
+        Username,
+        Password
+      });
+      console.log(`Has Login`, data?.responseData.DisplayName);
+      alert('Successfuly Login');
+      const isVerified = data?.responseData.isVerified
+      
+      if (!isVerified) {
+        alert('You Need to Verified your Email');
+        setIsLoading(false);
+      } else {
+        setTimeout(() => {
+          alert('Verified Email You can now Log in');
+          setIsLoading(false);
+        }, 2000);
+      };
+
+    } catch (error) {
+      const { message } = error.response.data;
+      setIsLoading(false);
+      alert(message);
+    };
+  };
 
   const initialValues = {
     Username: '',
@@ -34,10 +57,10 @@ const FormLogin = ({ onClose, isOpen }) => {
     Username: Yup.string().min(5).required(),
     Password: Yup.string().min(5).required()
   })
-
   const handleShow = () => {
     setShow(!show)
   }
+
 
   return (
     <Modal onClose={onClose} isOpen={isOpen} >

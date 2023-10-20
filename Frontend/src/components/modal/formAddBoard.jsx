@@ -1,17 +1,20 @@
-import { Modal, Flex, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, VStack, Input, HStack, Spacer, Center, Image, Box, Button } from "@chakra-ui/react";
+import { Modal, Flex, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, VStack, Input, HStack, Spacer, Center, Image, Box, Button, Popover } from "@chakra-ui/react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import InputField from "../input/inputField";
 import InputDate from "../input/inputDate";
 import PrimaryButton from "../buttons/primaryButton";
+import PopOverButton from "../buttons/popOverButton";
 
 
 const FormAddBoard = ({ isOpen, onClose }) => {
     const [ imageLink, setImageLink ] = useState('https://images.pexels.com/photos/18285166/pexels-photo-18285166/free-photo-of-toast-with-glasses-of-cold-drinks.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
     const [ isLoading, setIsLoading ] = useState(false)
     const [startDate, setStartDate] = useState(new Date());
+    const ref = useRef(null)
+
     const onSubmit = (values) => {
     setIsLoading(true)
     alert(JSON.stringify(values, null, 2))
@@ -36,27 +39,27 @@ const FormAddBoard = ({ isOpen, onClose }) => {
 
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
         <ModalOverlay />
-            <ModalContent>
+            <ModalContent >
                 <ModalHeader>
                     <Center>
                         Start a New Adventure
                     </Center>
                     <ModalCloseButton />
                 </ModalHeader>
-                <ModalBody>
+                <ModalBody ref={ref}>
 {/* Formik */} 
                 <Formik onSubmit={onSubmit} validationSchema={validationSchema} initialValues={initialValues}>
                 {({ handleSubmit, errors, touched }) => (
-                    <form onSubmit={handleSubmit}>                    
-                        {/* Form */}   
+                    <form onSubmit={handleSubmit} >                    
+                        {/* Form */}
                                 <Center bg='gray.500'>
                                     <Image src={imageLink}  boxSize='150px' objectFit='cover' alt='BG Background'/>
                                 </Center>     
-                                <Flex as="div" w='100%' >
+                                <Flex as="div" w='100%' bg='gray.500' >
                                     <Spacer />
-                                        <Button mt={'5'} mb={'3'}>Change Cover</Button>   
+                                    <PopOverButton containerRef={ref} buttonName='Change Cover' />  
                                 </Flex>                     
                             <VStack spacing={4} align='flex-start'>   
                                 <InputField errors={errors.BoardName} touched={touched.BoardName} fieldName='BoardName' Input={Input} type='text' variant='filled' />

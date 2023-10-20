@@ -5,7 +5,7 @@ const InputField = ({ errors, touched, fieldName, Input, type, variant }) => {
   return (
     <FormControl isInvalid={!!errors && touched}>
         <FormLabel htmlFor="Username">{fieldName}</FormLabel>
-        <Field as={Input} id={fieldName} name={fieldName} type={type} variant={variant} />
+        <Field as={Input} id={fieldName} name={fieldName} type={type} variant={variant} placeholder={fieldName} />
         <FormErrorMessage>{errors}</FormErrorMessage>
     </FormControl>
   )
