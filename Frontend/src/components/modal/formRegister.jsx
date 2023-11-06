@@ -2,28 +2,50 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody,
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
-
+import axios from "axios"
 // Components
 import InputField from "../input/inputField";
 import PrimaryButton from "../buttons/primaryButton";
 import { useNavigate } from "react-router-dom";
-
+import { registerRoute } from "../../util/APIroute";
 
 const FormRegister = ({ onClose, isOpen }) => {
   const [ isLoading, setIsLoading ] = useState(false)
   const navigation = useNavigate()
-  const onSubmit = (values) => {
-    setIsLoading(true)
-    alert(JSON.stringify(values, null, 2))
-    setTimeout(() => {
-      setIsLoading(false)
-      navigation('/home')
-    }, 2000)
+
+  const onSubmit = async (values) => {
+    const { DisplayName, Email, Occupation, Username, Password } = values;
+    
+    try {
+      const response = await axios.post(registerRoute, {
+        DisplayName, Email, Occupation, Username, Password
+      });
+  
+
+
+      const data = response.data;
+      
+     if (!data) {
+      alert('Registration Unsuccessful')
+     }
+
+     console.log('Successful Registration, We have sent and email Validation to you. Please Validate')
+     navigation('/')
+
+    } catch (error) {
+      if (error.response) {
+        const { message } = error.response.data;
+        alert(message);
+      } else {
+        console.error('An error occurred:', error);
+      }
+    }
   }
+  
 
   const initialValues = {
     Email: '',
-    Fullname: '',
+    DisplayName: '',
     Username: '',
     Password: '',
     RetypePassword: '',
@@ -31,7 +53,7 @@ const FormRegister = ({ onClose, isOpen }) => {
   }
 
   const ValidationSchema = Yup.object().shape({
-    Fullname: Yup.string().min(5, 'Full name must be at least 5 characters').required('Full name is required'),
+   // DisplayName: Yup.string().min(5, 'Full name must be at least 5 characters').required('Full name is required'),
     Email: Yup.string().email('Invalid email format').required('Email is required'),
     Username: Yup.string().min(5, 'Username must be at least 5 characters').required('Username is required'),
     Password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
@@ -61,8 +83,10 @@ const FormRegister = ({ onClose, isOpen }) => {
                   {/* Field Components */}
                   <InputField errors={errors.Email} touched={touched.Email} fieldName='Email' Input={Input} type='Email' variant='filled' />
                     
-                  <InputField errors={errors.Fullname} touched={touched.Fullname} fieldName='Fullname' Input={Input} type='text' variant='filled' />
+                  <InputField errors={errors.DisplayName} touched={touched.DisplayName} fieldName='DisplayName' Input={Input} type='text' variant='filled' />
                 
+                  <InputField errors={errors.Occupation} touched={touched.Occupation} fieldName='Occupation' Input={Input} type='text' variant='filled' />
+                  
                   <InputField errors={errors.Username} touched={touched.Username} fieldName='Username' Input={Input} type='text' variant='filled' />
                   
                   <InputField errors={errors.Password} touched={touched.Password} fieldName='Password' Input={Input} type='password' variant='filled' />

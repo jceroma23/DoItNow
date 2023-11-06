@@ -12,6 +12,11 @@ let transporter = nodemailer.createTransport({
     auth: {
         user: process.env.AUTH_EMAIL,
         pass: process.env.AUTH_PASS
+    },
+    port: 587,
+    tls: {
+        rejectUnauthorized: true,
+        minVersion: "TLSv1.2"
     }
 });
 
@@ -21,8 +26,7 @@ export const emailTransport = async () => {
             if (error) {
                 console.log(error);
             } else {
-                console.log("Ready for Message");
-                console.log("Nodemailer Success", success);
+                console.log("Nodemailer Success Ready for Message", success);
             }
         });
     } catch (error) {
@@ -40,7 +44,7 @@ export const sendVerification = async ({ _id, Email }) => {
             to: Email,
             subject: "Email Verification",
             html:`<p>Please Verify your Email Address to complete your Registration.</p> <p>This Link Expires in 6 Hours.</p>
-            <p>Please<a href=${currentUrl + "/api/auth/user/verify/" + _id + "/" + EmailToken}> Click the Link to Verify</a></p> <p>Thank you for Registering</p> `
+            <p>Please<a href=${currentUrl + "/user/verify/" + _id + "/" + EmailToken}> Click the Link to Verify</a></p> <p>Thank you for Registering</p> `
         }
     
         const hashedEmailToken = await secureEmailToken(EmailToken);

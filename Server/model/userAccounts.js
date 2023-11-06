@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    Occupation: {
+        type: String,
+        required: true
+    },
     Username: {
         type: String,
         required: true
@@ -26,6 +30,10 @@ const userSchema = new mongoose.Schema({
     isVerified: {
         type: Boolean,
         default: false
+    },
+    refreshToken: {
+        type: String
+        
     }
 }, { timestamps: true });
 

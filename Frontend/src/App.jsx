@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage'
 import HomePage from './pages/homePage'
 import BoardPage from './pages/boardPage';
 import TaskPage from './pages/taskPage';
+import VerifyPage from './pages/verifyPage';
 
 
 
@@ -34,6 +35,7 @@ function App() {
           <Route path='/home' element={<HomePage/>} />
           <Route path='/board' element={<BoardPage/>} />
           <Route path='/todo' element={<TaskPage/>} />
+          <Route path='/user/verify/:userId/:EmailToken' element={<VerifyPage/>} />
         </Routes>
       </BrowserRouter>
     )

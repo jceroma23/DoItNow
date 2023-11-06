@@ -28,7 +28,7 @@ const FormLogin = ({ onClose, isOpen }) => {
         Username,
         Password
       });
-      console.log(`Has Login`, data?.responseData.DisplayName);
+      console.log(`Has Login`, data.responseData.DisplayName);
       alert('Successfuly Login');
       const isVerified = data?.responseData.isVerified
       
@@ -36,10 +36,8 @@ const FormLogin = ({ onClose, isOpen }) => {
         alert('You Need to Verified your Email');
         setIsLoading(false);
       } else {
-        setTimeout(() => {
           alert('Verified Email You can now Log in');
           setIsLoading(false);
-        }, 2000);
       };
 
     } catch (error) {

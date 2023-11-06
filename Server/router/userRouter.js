@@ -5,5 +5,5 @@ import { registerController, verifyController, loginController } from "../contro
 export const userRouter = Router()
 
 userRouter.post('/register', registerController);
-userRouter.get('/user/verify/:userID/:emailToken', verifyController);
+userRouter.post('/user/verify', verifyController);
 userRouter.post('/login', loginController);
